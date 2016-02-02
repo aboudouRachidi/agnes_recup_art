@@ -15,6 +15,9 @@ class Products extends CI_Controller {
 		$data['tagsCouleurs'] = $this->products_model->getTags_Couleurs();
 		$data['tagsMateriaux'] = $this->products_model->getTags_materiaux();
 		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+		$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+		$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+		$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 		$data['sliderProducts'] = $this->products_model->getAll_sliderProducts();
 		
 		$this->load->view('includes/header',$data);
@@ -33,6 +36,9 @@ class Products extends CI_Controller {
 		$data['tagsCouleurs'] = $this->products_model->getTags_Couleurs();
 		$data['tagsMateriaux'] = $this->products_model->getTags_materiaux();
 		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+		$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+		$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+		$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 		$data['sliderProducts'] = $this->products_model->getAll_sliderProducts();
 
 		$this->load->view('includes/header',$data);
@@ -51,6 +57,9 @@ class Products extends CI_Controller {
 		$data['tagsCouleurs'] = $this->products_model->getTags_Couleurs();
 		$data['tagsMateriaux'] = $this->products_model->getTags_materiaux();
 		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+		$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+		$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+		$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 		$data['sliderProducts'] = $this->products_model->getAll_sliderProducts();
 		
 		$this->load->view('includes/header',$data);
@@ -69,6 +78,9 @@ class Products extends CI_Controller {
 		$data['tagsCouleurs'] = $this->products_model->getTags_Couleurs();
 		$data['tagsMateriaux'] = $this->products_model->getTags_materiaux();
 		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+		$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+		$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+		$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 		$data['sliderProducts'] = $this->products_model->getAll_sliderProducts();
 	
 		$this->load->view('includes/header',$data);
@@ -87,6 +99,9 @@ class Products extends CI_Controller {
 		$data['tagsCouleurs'] = $this->products_model->getTags_Couleurs();
 		$data['tagsMateriaux'] = $this->products_model->getTags_materiaux();
 		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+		$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+		$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+		$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 		$data['sliderProducts'] = $this->products_model->getAll_sliderProducts();
 	
 		$this->load->view('includes/header',$data);
@@ -105,6 +120,9 @@ class Products extends CI_Controller {
 		$data['tagsCouleurs'] = $this->products_model->getTags_Couleurs();
 		$data['tagsMateriaux'] = $this->products_model->getTags_materiaux();
 		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+		$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+		$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+		$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 		$data['sliderProducts'] = $this->products_model->getAll_sliderProducts();
 	
 		$this->load->view('includes/header',$data);
@@ -123,6 +141,9 @@ class Products extends CI_Controller {
 		$data['tagsCouleurs'] = $this->products_model->getTags_Couleurs();
 		$data['tagsMateriaux'] = $this->products_model->getTags_materiaux();
 		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+		$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+		$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+		$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 		$data['sliderProducts'] = $this->products_model->getAll_sliderProducts();
 	
 		$this->load->view('includes/header',$data);

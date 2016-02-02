@@ -21,6 +21,9 @@ class Compte extends CI_Controller {
 			$data['ordersWait'] = $this->Compte_model->getOrderWait($_SESSION['auth']['id']);
 			$data['ordersFinish'] = $this->Compte_model->getOrderFinish($_SESSION['auth']['id']);
 			$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+			$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+			$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+			$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 			
 			$this->load->view('includes/header',$data);
 			$this->load->view('includes/menu',$data);
@@ -75,6 +78,9 @@ class Compte extends CI_Controller {
 			$data['ordersWait'] = $this->Compte_model->getOrderWait($_SESSION['auth']['id']);
 			$data['ordersFinish'] = $this->Compte_model->getOrderFinish($_SESSION['auth']['id']);
 			$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+			$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+			$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+			$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 			$ordersDetails = $this->Compte_model->getOrder_detail($this->uri->segment(3));
 			
 			$this->load->view('includes/header',$data);
@@ -108,6 +114,9 @@ class Compte extends CI_Controller {
 			$data['ordersWait'] = $this->Compte_model->getOrderWait($_SESSION['auth']['id']);
 			$data['ordersFinish'] = $this->Compte_model->getOrderFinish($_SESSION['auth']['id']);
 			$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+			$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+			$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+			$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 			$ordersDetails = $this->Compte_model->getOrder_detail($this->uri->segment(3));
 			
 			$data['title'] = 'Espace client '.$_SESSION['auth']['email'];
@@ -123,6 +132,10 @@ class Compte extends CI_Controller {
 		$data['materiaux'] = $this->products_model->getAll_materiau();
 		$data['users'] = $this->Login_model->getAll($_SESSION['auth']['id']);
 		$data['ordersDetails'] = $this->Compte_model->getOrder_detail($this->uri->segment(3));
+		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+		$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+		$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+		$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 		$data['title'] = 'Details de la commande';
 		
 		$this->load->view('includes/header',$data);

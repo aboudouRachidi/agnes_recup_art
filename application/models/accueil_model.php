@@ -8,7 +8,7 @@ class Accueil_model extends CI_Model {
     }
 	public function getMentionLegale()
 	{
-		$this->db->where('titre = "mention"');
+		$this->db->where('titre = "mention-legale"');
 		$Query = $this->db->get("mention");
 		if($Query->num_rows() > 0 ){
 			foreach ($Query->result() as $mentionsLegales)
@@ -16,6 +16,48 @@ class Accueil_model extends CI_Model {
 				$data[] = $mentionsLegales;
 			}
 				
+			return $data;
+		}
+	}
+	
+	public function getLivraison()
+	{
+		$this->db->where('titre = "livraison"');
+		$Query = $this->db->get("mention");
+		if($Query->num_rows() > 0 ){
+			foreach ($Query->result() as $mentionsLivraisons)
+			{
+				$data[] = $mentionsLivraisons;
+			}
+	
+			return $data;
+		}
+	}
+
+	public function getCGV()
+	{
+		$this->db->where('titre = "condition-generale-vente"');
+		$Query = $this->db->get("mention");
+		if($Query->num_rows() > 0 ){
+			foreach ($Query->result() as $mentionsCGV)
+			{
+				$data[] = $mentionsCGV;
+			}
+	
+			return $data;
+		}
+	}
+	
+	public function getCGU()
+	{
+		$this->db->where('titre = "Terme-condition-utilisation"');
+		$Query = $this->db->get("mention");
+		if($Query->num_rows() > 0 ){
+			foreach ($Query->result() as $mentionsCGU)
+			{
+				$data[] = $mentionsCGU;
+			}
+	
 			return $data;
 		}
 	}

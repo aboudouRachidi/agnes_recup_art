@@ -53,6 +53,9 @@ class Agenda extends CI_Controller {
 		$data['materiaux'] = $this->products_model->getAll_materiau();
 		$data['DateArchives'] = $this->agenda_model->getAll_DateArchives();
 		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+		$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+		$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+		$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 		
 		$this->load->view('includes/header',$data);
 		$this->load->view('includes/menu',$data);
@@ -71,6 +74,9 @@ class Agenda extends CI_Controller {
 		$data['materiaux'] = $this->products_model->getAll_materiau();
 		$data['DateArchives'] = $this->agenda_model->getAll_DateArchives();
 		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+		$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+		$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+		$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 	
 		$this->load->view('includes/header',$data);
 		$this->load->view('includes/menu',$data);

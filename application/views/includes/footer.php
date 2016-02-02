@@ -31,7 +31,12 @@
 		        <h4 class="modal-title text-center" id="myModalLabel">Livraison</h4>
 		      </div>
 		      <div class="modal-body">
-				.........
+		        	<?php if(!empty($mentionsLivraison)):?>
+	       	   		<?php foreach ($mentionsLivraison as $livraison):?>
+	       	   		<?=$livraison->texte;?>
+	       	   		
+					<?php endforeach;?>
+					<?php endif;?>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
@@ -39,7 +44,55 @@
 		    </div>
 		  </div>
 		</div>
-		<!--Fin Livraison -->	
+		<!--Fin Livraison -->
+		
+		<!-- CGU -->
+		<div class="modal fade" id="modalCGU" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title text-center" id="myModalLabel">Conditions générales d’utilisation</h4>
+		      </div>
+		      <div class="modal-body">
+		        	<?php if(!empty($mentionsCGU)):?>
+	       	   		<?php foreach ($mentionsCGU as $CGU):?>
+	       	   		<?=$CGU->texte;?>
+	       	   		
+					<?php endforeach;?>
+					<?php endif;?>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!--Fin CGU -->
+		<!-- CGV -->
+		<div class="modal fade" id="modalCGV" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title text-center" id="myModalLabel">Conditions générales de vente</h4>
+		      </div>
+		      <div class="modal-body">
+		        	<?php if(!empty($mentionsCGV)):?>
+	       	   		<?php foreach ($mentionsCGV as $CGV):?>
+	       	   		<?=$CGV->texte;?>
+	       	   		
+					<?php endforeach;?>
+					<?php endif;?>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!--Fin CGV -->	
+		
 		<!-- content-section-ends-here -->
 		<div class="news-letter">
 			<div class="container">
@@ -66,7 +119,6 @@
 						<li><a href="<?=base_url('agenda')?>">Agenda</a></li>
 						<li><a href="<?=base_url('blog')?>">Blog</a></li>
 						<li><a href="<?=base_url('galerie')?>">Galerie</a></li>
-						<li><a href="<?=base_url('presentation')?>">Qui suis je</a></li>
 						<li><a href="<?=base_url('contact')?>">Contact</a></li>
 						<li><a href="<?= base_url('checkout')?>">Panier</a></li>
 					</ul>	
@@ -83,6 +135,8 @@
 				<div class="col-md-3 span1_of_4">
 					<h4>Informations</h4>
 					<ul class="f_nav">
+						<li><a href="#" data-toggle="modal" data-target="#modalCGU">Conditions générales d’utilisation</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#modalCGV">Conditions générales de vente</a></li>
 						<li><a href="#" data-toggle="modal" data-target="#modalLiv">Livraisons</a></li>
 					</ul>	
 				</div>
@@ -91,6 +145,7 @@
 					<h4>A propos</h4>
 					<ul class="f_nav">
 						<li><a href="#" data-toggle="modal" data-target="#modalML">Mentions légales</a></li>
+						<li><a href="<?=base_url('presentation')?>">Qui suis je</a></li>
 					</ul>			
 				</div>
 				<div class="clearfix"></div>
@@ -100,7 +155,7 @@
 				
 		  </div>
 		  <div class="copyright text-center">
-				<p>© 2016 Agnès Recup'Art. All Rights Reserved | Design by   <a href="http://w3layouts.com">  W3layouts</a></p>
+				<p>© 2016 Agnès Recup'Art. Tous droits réservés | Design by   <a href="http://w3layouts.com">  W3layouts</a></p>
 		  </div>
 		</div>
 		</div>

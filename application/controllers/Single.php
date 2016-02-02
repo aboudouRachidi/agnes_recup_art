@@ -19,6 +19,9 @@ class Single extends CI_Controller {
 		$data['produit_materiaux'] = $this->single_model->getAll_produit_materiaux($this->uri->segment(4));
 		$data['photos_produit'] = $this->single_model->getAll_photos_produit($this->uri->segment(4));
 		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
+		$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
+		$data['mentionsCGU'] = $this->Accueil_model->getCGU();
+		$data['mentionsCGV'] = $this->Accueil_model->getCGV();
 		$data['sliderProducts'] = $this->products_model->getAll_sliderProducts();
 		
 		$this->load->view('includes/header',$data);
