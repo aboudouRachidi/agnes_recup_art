@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://127.0.0.1/recup_art/';
+$config['base_url'] = 'http://127.0.0.1/agnes_recup_art/';
 
 /*
 |--------------------------------------------------------------------------
