@@ -8,6 +8,8 @@ class Accueil extends CI_Controller {
         $this->clear_cache();
        
     }
+    
+
 	public function index()
 	{
 		$data['title'] = 'Accueil';
@@ -28,29 +30,33 @@ class Accueil extends CI_Controller {
 		$this->load->view('includes/footer',$data);
 	}
 	
-	function newsubscribe(){
-
+	public function newsubscribe()
+	{
 		$this->form_validation->set_rules('email','Email','trim|required|xss_clean|valid_email|callback_check_email');
-
-	if($this->form_validation->run()){
-			$data = array(
-					'email' =>$this->input->post('email')
-
-			);
+	
+		if($this->form_validation->run()){
+				$data = array(
+						'email' =>$this->input->post('email')
+	
+				);
+					
+				$this->Accueil_model->new_subscriber($data);
+	
+				$data = $this->session->set_flashdata('info','L\'inscription a été prise en compte');
 				
-			$this->Accueil_model->new_subscriber($data);
-
-			$data = $this->session->set_flashdata('info','L\'inscription a été prise en compte');
-			
+				redirect($_SERVER['HTTP_REFERER'],$data);
+			}else{
+			$data = $this->session->set_flashdata('info','Cet email<b class="btn btn-danger btn-xs"> '.$this->input->post('email').' </b>est déjà utilisé');
+				
 			redirect($_SERVER['HTTP_REFERER'],$data);
-		}else{
-		$data = $this->session->set_flashdata('info','Cet email<b class="alert alert-danger">'.$this->input->post('email').'</b>est déjà utilisé');
-			
-		redirect($_SERVER['HTTP_REFERER'],$data);
-	}
+		}
 	}
 
 	//fonction de call back
+	/**
+	 * Permet de verifier si l'adresse email saisi pour abonnement newsletter existe déjà
+	 * @return true ou false
+	 */
 	function check_email(){
 	
 		if($this->input->post('email')){

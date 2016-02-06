@@ -6,8 +6,22 @@ class Products_model extends CI_Model {
     function __construct(){
         parent::__construct();
     }
-	public function getAll_products()
-	{
+ 
+    /**
+     * Permet de compter le nombre de données dans la table produit pour la pagination
+     * @return nombre
+     */
+    public function total_products() {
+    	return $this->db->count_all("produit");
+    }
+    
+    /**
+     * Permet de recuperer les produits 
+     * @return tableau $data['produits'] contenant les données
+     */
+	public function getAll_products($limit,$start)
+	{		
+		$this->db->limit($limit,$start);
 		$Query = $this->db->get("produit");
 		if($Query->num_rows() > 0 ){
 			foreach ($Query->result() as $produits)
@@ -19,6 +33,10 @@ class Products_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les derniers produits
+	 * @return tableau $data['produits'] contenant les données
+	 */
 	public function getAll_lastProducts()
 	{
 		$this->db->from("produit");
@@ -35,6 +53,10 @@ class Products_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les produits pour le slider
+	 * @return tableau $data['sliderProduits'] contenant les données
+	 */
 	public function getAll_sliderProducts()
 	{
 		$this->db->from("produit,slider");
@@ -50,6 +72,10 @@ class Products_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les categories
+	 * @return tableau $data['categories'] contenant les données
+	 */
 	public function getAll_categories()
 	{
 		$Query = $this->db->get("categorie");
@@ -63,6 +89,10 @@ class Products_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les materiaux
+	 * @return tableau $data['materiaux'] contenant les données
+	 */
 	public function getAll_materiau()
 	{
 		$Query = $this->db->get("materiaux");
@@ -76,6 +106,11 @@ class Products_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les produits par materiau
+	 * @param $id materiau associer au produit à trouver dans la base de données 
+	 * @return tableau $data['produits'] contenant les données
+	 */
 	public function materialProducts($id)
 	{
 		$this->db->where('produit_materiaux.id_materiaux = materiaux.id_materiaux
@@ -92,6 +127,11 @@ class Products_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les produits par categorie
+	 * @param $id categorie associer à un produit à trouver dans la base de données
+	 * @return tableau $data['produits'] contenant les données
+	 */
 	public function categoryProducts($id)
 	{
 		$this->db->where('produit.id_categorie = categorie.id_categorie 
@@ -107,6 +147,11 @@ class Products_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les produits par tagsCouleurs
+	 * @param $tags couleur associer à un produit à trouver dans la base de données
+	 * @return tableau $data['produits'] contenant les données
+	 */
 	public function tagsCouleurProducts($tags)
 	{
 		$this->db->where('produit_couleur.id_couleur = couleur.id_couleur
@@ -122,6 +167,11 @@ class Products_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les produits par tagsMateriau
+	 * @param $tags materiau associer à un produit à trouver dans la base de données
+	 * @return tableau $data['produits'] contenant les données
+	 */
 	public function tagsMateriauxProducts($tags)
 	{
 		$this->db->where('produit_materiaux.id_materiaux = materiaux.id_materiaux
@@ -137,9 +187,13 @@ class Products_model extends CI_Model {
 		}
 	}
 	
-	
-	public function orderByName()
+	/**
+	 * Permet de trier les produits par nom
+	 * @return tableau $data['produits'] contenant les données
+	 */
+	public function orderByName($limit,$start)
 	{
+		$this->db->limit($limit,$start);
 		$this->db->from("produit");
 		$this->db->order_by("nom_produit");
 		$Query = $this->db->get();
@@ -153,8 +207,13 @@ class Products_model extends CI_Model {
 		}
 	}
 	
-	public function orderByPrice()
+	/**
+	 * Permet de trier les produits par prix - au +
+	 * @return tableau $data['produits'] contenant les données
+	 */
+	public function orderByPrice($limit,$start)
 	{
+		$this->db->limit($limit,$start);
 		$this->db->from("produit");
 		$this->db->order_by("prix");
 		$Query = $this->db->get();
@@ -168,6 +227,10 @@ class Products_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les tagsCouleur
+	 * @return tableau $data['tagsCouleurs'] contenant les données
+	 */
 	public function getTags_Couleurs()
 	{
 		$this->db->from("couleur");
@@ -179,11 +242,15 @@ class Products_model extends CI_Model {
 			{
 				$data[] = $tagsCouleurs;
 			}
-				
+	
 			return $data;
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les tagsMateriaux
+	 * @return tableau $data['tagsMateriaux'] contenant les données
+	 */
 	public function getTags_Materiaux()
 	{
 		$this->db->from("materiaux");
@@ -199,5 +266,4 @@ class Products_model extends CI_Model {
 			return $data;
 		}
 	}
-	
 }

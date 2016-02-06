@@ -8,6 +8,11 @@ class Compte_model extends CI_Model {
         parent::__construct();
         
     }
+    
+    /**
+     * Permet de mettre à jour les données de la table client selon les parametres
+     * @param $id client à trouver dans la base de données, $data données à modifier
+     */
 	public function update_client($id,$data)
 	{
 		$this->db->where('id_client', $id);
@@ -19,7 +24,10 @@ class Compte_model extends CI_Model {
 		//  
 	}
 	
-	
+	/**
+	 * Permet de mettre à jour le champ mot de passe de la table client selon les parametres
+	 * @param $id client à trouver dans la base de données, $mdp le mot de passe à modifier 
+	 */	
 	public function update_mdp($id,$mdp)
 	{
 		
@@ -32,6 +40,11 @@ class Compte_model extends CI_Model {
 		//      WHERE id = $id
 	}
 	
+	/**
+	 * Permet de recuperer les commandes en cours d'un client
+	 * @param $id client à trouver dans la base de données
+	 * @return tableau $data['commande'] contenant les données
+	 */
 	public function getOrder($id)
 	{
 		$this->db->where('commande.id_client = client.id_client AND client.id_client = '.$id);
@@ -47,6 +60,11 @@ class Compte_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les commandes en attente d'un client
+	 * @param $id client à trouver dans la base de données
+	 * @return tableau $data['commandeW'] contenant les données
+	 */
 	public function getOrderWait($id)
 	{
 		$this->db->where('commande.id_client = client.id_client AND client.id_client = '.$id);
@@ -62,6 +80,11 @@ class Compte_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les commandes terminées d'un client
+	 * @param $id client à trouver dans la base de données
+	 * @return tableau $data['commandeF'] contenant les données
+	 */
 	public function getOrderFinish($id)
 	{
 		$this->db->where('commande.id_client = client.id_client AND client.id_client = '.$id);
@@ -77,6 +100,11 @@ class Compte_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les détails d'une commande
+	 * @param $id commande à trouver dans la base de données
+	 * @return tableau $data['commande'] contenant les données
+	 */
 	public function getOrder_detail($id)
 	{
 		$this->db->where('commande.id_client = client.id_client AND detail_commande.id_commande = commande.id_commande
@@ -92,6 +120,10 @@ class Compte_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de supprimer une commande en attente d'un client
+	 * @param $id commande à trouver dans la base de données
+	 */
 	public function DeleteOrder($id){
 		$tables = array('detail_commande','commande');
 		$this->db->where('id_commande', $id);

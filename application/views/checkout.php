@@ -17,8 +17,8 @@
                 </ul>
                 <div class="clearfix"></div>
 			   </div>
-			 	<?php if(isset($_SESSION['info'])):?>
-					<div class="alert alert-warning" id="alert-message"> <?=$_SESSION['info'];?></div>
+			 	<?php if(isset($_SESSION['error'])):?>
+					<div class="alert alert-warning"> <?=$_SESSION['error'];?></div>
 				<?php endif;?>	
 			 <h2>MON PANIER (<?= $this->cart->total_items();?>)</h2>
 			 <?php if($this->cart->contents()):?>
@@ -72,6 +72,15 @@
 								</div>						  
 						  </form>
 						 <?php endforeach;?>
+						 
+	 			<div class="row"><a id="top"></a>
+	 			<div class="col-md-8"></div>
+	   				<div class="col-md-4 text-right">	
+						<a href="<?= base_url('checkout/orderDelivry')?>" class="btn btn-default btn-lg" role="button">Commander maintenant</a>
+					</div>
+				</div>
+				
+				
 						 <?php else :?>
 						  <div class="cart-header3">
 							  <div class="cart-sec simpleCart_shelfItem">

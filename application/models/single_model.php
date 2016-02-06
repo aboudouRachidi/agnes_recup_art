@@ -6,6 +6,12 @@ class Single_model extends CI_Model {
     function __construct(){
         parent::__construct();
     }
+    
+    /**
+     * Permet de lister la fiche produit avec 'sa catégorie' selon le parametre
+     * @param $id le produit à recuperer dans la base de données
+     * @return $produit le produit
+     */
 	public function show_single($id)
 	{
 		$this->db->where('produit.id_categorie = categorie.id_categorie');
@@ -18,6 +24,11 @@ class Single_model extends CI_Model {
 		
 	}
 	
+	/**
+	 * Permet de lister la fiche produit avec 'ses couleurs' selon le parametre
+	 * @param $id le produit à recuperer dans la base de données
+	 * @return $data les couleurs du produit
+	 */
 	public function getAll_produit_couleurs($id)
 	{
 		$SELECT ='SELECT couleur,code_couleur FROM `couleur`,`produit_couleur`,`produit`
@@ -34,6 +45,11 @@ class Single_model extends CI_Model {
 		return $data;
 	}
 	
+	/**
+	 * Permet de lister la fiche produit avec 'ses materiaux' selon le parametre
+	 * @param $id le produit à recuperer dans la base de données
+	 * @return $data les materiaux du produit
+	 */
 	public function getAll_produit_materiaux($id)
 	{
 		$SELECT ='SELECT nom_materiaux FROM `materiaux`,`produit_materiaux`,`produit`
@@ -50,6 +66,11 @@ class Single_model extends CI_Model {
 		return $data;
 	}
 	
+	/**
+	 * Permet de lister la fiche produit avec 'ses photos' selon le parametre
+	 * @param $id le produit à recuperer dans la base de données
+	 * @return $data les photos du produit
+	 */
 	public function getAll_photos_produit($id)
 	{
 		$SELECT ='SELECT * FROM `produit`,`photo_produit`

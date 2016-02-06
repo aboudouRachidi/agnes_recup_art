@@ -1,4 +1,4 @@
-					<?php if(!empty($galeries)):?>
+					<?php if(!empty($SliderGaleries)):?>
 	       	   		
 <div class="other-products">
 		<div class="container">
@@ -6,11 +6,11 @@
 					<h3 class="head text-center">Ma Galerie</h3>
 				</header>      			
 				     <ul id="flexiselDemo3">
-				     <?php foreach ($galeries as $galerie):?>
+				     <?php foreach ($SliderGaleries as $SliderGalerie):?>
 						<li>
 						 <div class="row style_featured">
-            				<div class="col-xs-6 col-md-3">				
-								<img class="img-rounded img-thumbnail" src="<?= base_url()?>ressources/images/galerie/<?= $galerie->url;?>" class="img-responsive" title="<?php echo $galerie->titre?>" style="max-height:280px; max-width:280px"/>
+            				<div class="col-xs-10 col-md-10">				
+								<img class="img-rounded img-thumbnail" src="<?= base_url()?>ressources/images/galerie/<?= $SliderGalerie->url;?>" class="img-responsive" title="<?php echo $SliderGalerie->titre?>" />
 						 	</div>
             			</div>
 						</li>

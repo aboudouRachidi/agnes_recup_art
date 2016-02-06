@@ -6,7 +6,7 @@ class Contact_model extends CI_Model {
     function __construct(){
         parent::__construct();
     }
-	public function message($data)
+	public function contact()
 	{
 		
 	}

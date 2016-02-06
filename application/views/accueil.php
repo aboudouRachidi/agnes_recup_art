@@ -99,13 +99,13 @@
 					<?php if(!empty($lastProducts)):?>
 	       	   		<?php foreach ($lastProducts as $lastProduct):?>
 	       	   		
-					<div class="col-md-4 product simpleCart_shelfItem text-center well">
-						<a class="zoombox" href="<?= base_url()?>ressources/images/photoProduit/<?=$lastProduct->photo_principale?>"><img src="<?= base_url()?>ressources/images/photoProduit/<?=$lastProduct->photo_principale?>" alt="" height="299" width="70"/></a>
+					<div class="col-md-4 product simpleCart_shelfItem text-center">
+						<a class="zoombox" href="<?= base_url()?>ressources/images/photoProduit/<?=$lastProduct->photo_principale?>"><img src="<?= base_url()?>ressources/images/photoProduit/<?=$lastProduct->photo_principale?>" alt="" id="img-responsive" class="img-responsive thumbnail"/></a>
 						<div class="mask">
-							<a href="<?=base_url('single/index/'.strtolower(url_title(convert_accented_characters($lastProduct->nom_produit))).'/'.$lastProduct->id_produit)?>">Aperçu</a>
+							<a class="zoombox" href="<?= base_url()?>ressources/images/photoProduit/<?=$lastProduct->photo_principale?>">Aperçu</a>
 						</div>
-						<a class="product_name"><?=$lastProduct->nom_produit?></a>
-						<p><a class="item_add" href="<?= base_url()?>ressources/images/photoProduit/<?=$lastProduct->photo_principale?>"><i></i> <span class="item_price"><?=$lastProduct->prix?> €</span></a></p>
+						<a href="<?=base_url('single/index/'.strtolower(url_title(convert_accented_characters($lastProduct->nom_produit))).'/'.$lastProduct->id_produit)?>" class="product_name"><?=$lastProduct->nom_produit?></a>
+						<p><a class="item_add" href="<?=base_url('single/index/'.strtolower(url_title(convert_accented_characters($lastProduct->nom_produit))).'/'.$lastProduct->id_produit)?>"><i></i> <span class="item_price"><?=$lastProduct->prix?> €</span></a></p>
 					</div>
 					<?php endforeach;?>
 					<?php endif;?>

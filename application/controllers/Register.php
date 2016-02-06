@@ -17,6 +17,7 @@ class Register extends CI_Controller {
 		$this->form_validation->set_rules('nom','Nom','trim|required|xss_clean');
 		$this->form_validation->set_rules('prenom','Prenom','trim|required|xss_clean');
 		$this->form_validation->set_rules('email','Email','trim|required|xss_clean|valid_email|callback_check_email');
+		$this->form_validation->set_rules('ConfirmEmail','Confirmer Email','trim|required|xss_clean|valid_email|callback_check_confirm_mail');
 		$this->form_validation->set_rules('mdp','Mot de passe','trim|required|xss_clean|min_length[6]');
 		$this->form_validation->set_rules('confirm_mdp','Comfirmer mot de passe','trim|required|xss_clean|callback_check_mdp');
 		
@@ -63,6 +64,9 @@ class Register extends CI_Controller {
 	}
 	
 	//fonction de call back
+	/**
+	 * Permet de verifier si l'adresse email est déjà utilisé 
+	 */
 	function check_email(){
 		
 		if($this->input->post('email')){
@@ -83,11 +87,31 @@ class Register extends CI_Controller {
 		}
 	}
 	
+	/**
+	 * Permet de verifier si les mots de passe sont identique
+	 */
 	function check_mdp(){
 	
 		if(hash('sha256',$this->input->post('mdp')) !== hash('sha256',$this->input->post('confirm_mdp'))){
 	
 			$this->form_validation->set_message('check_mdp', 'Les mots de passe ne correspondent pas');
+	
+			return false;
+	
+		}else{
+	
+			return true;
+		}
+	}
+	
+	/**
+	 * Permet de verifier si les adresses email sont identique
+	 */
+	function check_confirm_mail(){
+	
+		if($this->input->post('email') !== $this->input->post('ConfirmEmail')){
+	
+			$this->form_validation->set_message('check_confirm_mail', 'L\'adresse email est différent');
 	
 			return false;
 	

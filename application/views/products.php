@@ -15,13 +15,13 @@
 				</div>
 
 				<div class="tags">
-				    	<h4 class="tag_head text-center">Tags Widget</h4>
+				    	<h4 class="tag_head text-center">Tags</h4>
 				         <ul class="tags_links">
 				         	<?php if(!empty($tagsCouleurs)):?>
 							<?php foreach ($tagsCouleurs as $tagsCouleur):?>
 
 							<li>
-								<a href="<?= base_url('products/tagsCouleursProducts/'.strtolower(url_title(convert_accented_characters($tagsCouleur->couleur))).'/'.$tagsCouleur->id_couleur)?>">
+								<a href="<?= base_url('products/tagsCouleursProducts/'.strtolower(url_title(convert_accented_characters($tagsCouleur->couleur))))?>">
 									<?= $tagsCouleur->couleur?>
 								</a>
 							</li>
@@ -33,7 +33,7 @@
 							<?php foreach ($tagsMateriaux as $tagsMateriau):?>
 
 							<li>
-								<a href="<?= base_url('products/tagsMateriauxProducts/'.strtolower(url_title(convert_accented_characters($tagsMateriau->nom_materiaux))).'/'.$tagsMateriau->id_materiaux)?>">
+								<a href="<?= base_url('products/tagsMateriauxProducts/'.strtolower(url_title(convert_accented_characters($tagsMateriau->nom_materiaux))))?>">
 									<?= $tagsMateriau->nom_materiaux?>
 								</a>
 							</li>
@@ -72,13 +72,11 @@
 	                   </div>
 	                   
 	    		     </div>
-	    		     	<!-- 
+	    		     	
 			    	        <ul class="women_pagenation">
-						     <li>Page:</li>
-						     <li class="active"><a href="#">1</a></li>
-						     <li><a href="#">2</a></li>
+						     <?=$this->pagination->create_links();?>
 					  	    </ul>
-				  	    -->
+				  	   
 	               		 <div class="clearfix"></div>		
 			        </div>
 			          
@@ -102,7 +100,7 @@
 							 <div class="view view-first">
 					   		  <div class="inner_content clearfix well well-sm">
 								<div class="product_image">
-									<img src="<?= base_url()?>ressources/images/photoProduit/<?= $produit->photo_principale;?>" class="img-responsive" alt="<?= $produit->nom_produit;?>" title="<?= $produit->nom_produit;?>"/>
+									<img src="<?= base_url()?>ressources/images/photoProduit/<?= $produit->photo_principale;?>" id="img-responsive" class="img-responsive" alt="<?= $produit->nom_produit;?>" title="<?= $produit->nom_produit;?>"/>
 									<div class="mask">
 			                       		<div class="info">Aperçu</div>
 					                  </div>
@@ -110,7 +108,7 @@
 									   <div class="cart-left">
 										 <p class="title text-left"><?= $produit->nom_produit;?></p>
 									   </div>
-									   <div class="pricey well well-sm"><span class="item_price"><?= $produit->prix;?> €</span></div>
+									   <div class="pricey"><span class="item_price"><?= $produit->prix;?> €</span></div>
 									   <div class="clearfix"></div>
 								     </div>		
 								  </div>
@@ -155,7 +153,7 @@
          	<?php if(!empty($tagsCouleurs)):?>
 			<?php foreach ($tagsCouleurs as $tagsCouleur):?>
 
-				<a class="btn btn-default btn-md" style="background-color: <?= $tagsCouleur->code_couleur?>" href="<?= base_url('products/tagsCouleursProducts/'.strtolower(url_title(convert_accented_characters($tagsCouleur->couleur))).'/'.$tagsCouleur->id_couleur)?>">
+				<a class="btn btn-default btn-md" style="background-color: <?= $tagsCouleur->code_couleur?>" href="<?= base_url('products/tagsCouleursProducts/'.strtolower(url_title(convert_accented_characters($tagsCouleur->couleur))))?>">
 					
 				</a>
 			
@@ -172,6 +170,9 @@
 			</div>
 			<div class="clearfix"></div>
 			</div>
+ <ul class="women_pagenation">
+						     <?=$this->pagination->create_links();?>
+					  	    </ul>
 			<div class="clearfix"></div>
    </div>
    <!-- content-section-ends -->

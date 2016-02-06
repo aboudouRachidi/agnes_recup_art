@@ -8,7 +8,7 @@
 						<li>
 						<div class="well">
 							<a href="<?= base_url('single/index/'.strtolower(url_title(convert_accented_characters($sliderProduct->nom_produit))).'/'.$sliderProduct->id_produit)?>">
-								<img src="<?=base_url()?>ressources/images/photoProduit/<?=$sliderProduct->photo_principale?>" class="img-responsive"/>
+								<img src="<?=base_url()?>ressources/images/photoProduit/<?=$sliderProduct->photo_principale?>" id="img-responsive" class="img-responsive"/>
 							</a>
 						</div>	
 							<div class="product liked-product simpleCart_shelfItem">

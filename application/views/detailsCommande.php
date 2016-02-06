@@ -12,14 +12,14 @@
                     <h2><?=$orderDetail->nom_produit?></h2>
                     <p style="text-align: left;">
                         <span>Prix : </span>
-                        <?=$orderDetail->prix?><i class="fa fa-eur"></i>
+                        <?=$orderDetail->prix?> <i class="fa fa-eur"></i>
                     </p>
                     <p style="text-align: left;">
-                        <span class="fa fa-info-circle">Quantité</span>
+                        <span>Quantité : </span>
                         <?=$orderDetail->quantite?>
                     </p>
                     <p style="text-align: left;">
-                        <span class="fa fa-calendar "></span>
+                        <span>Ce produit a été commander le</span>
                         <?php $bad_date = $orderDetail->date_commande; $better_date = nice_date($bad_date, 'd-m-Y'); echo $better_date?>
                     </p>
                     <a href="<?= base_url('single/index/'.strtolower(url_title(convert_accented_characters($orderDetail->nom_produit))).'/'.$orderDetail->id_produit)?>" class="btn btn-success" title="Afficher plus">Plus... »</a>

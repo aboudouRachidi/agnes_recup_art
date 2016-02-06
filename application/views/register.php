@@ -53,9 +53,9 @@
 		                    </div>
 		                </div>
 		                <div class="form-group">
-		                    <label for="InputEmail">Confirmer Email</label>
+		                    <label for="InputEmail">Confirmer Email</label><?= form_error('ConfirmEmail', '<div class="alert alert-danger">','</div>');?>
 		                    <div class="input-group">
-		                        <input type="email" class="form-control" id="InputEmailSecond" name="ConfirmEmail" placeholder="Confirmer Email" required>
+		                        <input type="email" value="<?= set_value('ConfirmEmail')?>" class="form-control" id="InputEmailSecond" name="ConfirmEmail" placeholder="Confirmer Email" required>
 		                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
 		                    </div>
 		                </div>
@@ -75,7 +75,7 @@
 		                </div>
 					
 						 <input type="submit" value="VALIDER">
-						 <p class="click">En cliquant sur ce boutton, vous acceptez <a href="contrat">les termes et conditions.</a></p> 
+						 <p class="click">En cliquant sur ce boutton, vous acceptez <a href="#" data-toggle="modal" data-target="#modalCGU">les termes et conditions.</a></p> 
 					 
 					 </form>
 				 </div>

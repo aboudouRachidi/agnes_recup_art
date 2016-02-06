@@ -9,6 +9,7 @@ class Checkout extends CI_Controller {
 	public function index()
 	{
 		$data['title'] = 'Panier';
+		
 		$data['categories'] = $this->products_model->getAll_categories();
 		$data['materiaux'] = $this->products_model->getAll_materiau();
 		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
@@ -22,7 +23,10 @@ class Checkout extends CI_Controller {
 		$this->load->view('includes/footer',$data);
 	}
 	
-	 function add()
+	/**
+	 * Permet d'ajouter un produit dans le panier
+	 */
+	function add()
 	{
 		$data = array(
 		        'id'      => $this->input->post('id_produit'),
@@ -35,11 +39,13 @@ class Checkout extends CI_Controller {
 				
 		);
 
-			$this->cart->insert($data);
-			redirect('checkout');
-		
+		$this->cart->insert($data);
+		redirect('checkout');	
 	}
 	
+	/**
+	 * Permet de mettre à jour un produit du panier
+	 */
 	function update(){
 		$data = array(
 			'rowid' => $this->input->post('rowid'),
@@ -50,6 +56,9 @@ class Checkout extends CI_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 	
+	/**
+	 * Permet de supprimer un produit du panier
+	 */
 	function delete(){
 		$data = array(
 				'rowid' => $this->uri->segment(3),
@@ -60,13 +69,18 @@ class Checkout extends CI_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 	
+	/**
+	 * Permet de vider le panier
+	 */
 	function emptyCart(){
 
 		$this->cart->destroy();
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 	
-	
+	/**
+	 * Permet la connexion de l'utilisateur depuis le panier
+	 */
 	function connect(){
 		$this->form_validation->set_rules('email','Email','trim|required|xss_clean|valid_email');
 		$this->form_validation->set_rules('mdp','Mot de passe','trim|required|xss_clean');
@@ -82,13 +96,16 @@ class Checkout extends CI_Controller {
 				redirect('checkout',$data);
 		
 			}else{
-				$data = $this->session->set_flashdata('info','Mauvais identifiants'.'
+				$data = $this->session->set_flashdata('error','Mauvais identifiants'.'
 						<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">Reessayer ?</button>');
 				redirect('checkout',$data);
 			}
 		}
 	}
 	
+	/**
+	 * Permet de verifier l'adresse de livraison
+	 */
 	function orderDelivry(){
 		if($this->session->userdata('auth') || $this->session->userdata('logged')){
 		
@@ -124,7 +141,7 @@ class Checkout extends CI_Controller {
 		
 		}else{
 			
-			$data = $this->session->set_flashdata('info','Veuillez vous connecté pour enregistrer votre commande '.'
+			$data = $this->session->set_flashdata('error','Veuillez vous connecté pour enregistrer votre commande '.'
 					<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Se connecter</button>');
 			redirect(base_url('checkout',$data));
 			
@@ -137,6 +154,9 @@ class Checkout extends CI_Controller {
 		
 	}
 	
+	/**
+	 * Permet de recapituler l'adresse ainsi que l'etat du panier avant l'enregistrement de la commande
+	 */
 	function orderRecap(){
 		
 		if($this->session->userdata('auth') || $this->session->userdata('logged')){
@@ -150,7 +170,7 @@ class Checkout extends CI_Controller {
 		
 		}else{
 			
-			$data = $this->session->set_flashdata('info','Veuillez vous connecté pour enregistrer votre commande'.'
+			$data = $this->session->set_flashdata('error','Veuillez vous connecté pour enregistrer votre commande'.'
 					<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Se connecter</button>');
 			redirect(base_url('checkout',$data));
 			
@@ -163,6 +183,9 @@ class Checkout extends CI_Controller {
 	
 	}
 	
+	/**
+	 * Permet d'enregistrer la commande dans la base de données
+	 */
 	function saveOrder(){
 		
 		$this->load->model('checkout_model');
@@ -194,6 +217,9 @@ class Checkout extends CI_Controller {
 		redirect(base_url('checkout/orderValidation'));
 	}
 	
+	/**
+	 * Permet d'afficher la page final "commande terminée
+	 */
 	function orderValidation(){
 		
 		if($this->session->userdata('auth') || $this->session->userdata('logged')){
@@ -207,7 +233,7 @@ class Checkout extends CI_Controller {
 
 		}else{
 			
-			$data = $this->session->set_flashdata('info','Veuillez vous connecté pour enregistrer votre commande'.'
+			$data = $this->session->set_flashdata('error','Veuillez vous connecté pour enregistrer votre commande'.'
 					<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Se connecter</button>');
 			redirect(base_url('checkout',$data));
 		}
@@ -218,44 +244,47 @@ class Checkout extends CI_Controller {
 		}
 	}
 	
+	/**
+	 * Permet d'envoyer la commande par email utilisateur si il le souhaite
+	 */
 	function sendOrder(){
 		
 		if($this->session->userdata('auth') || $this->session->userdata('logged')){	
 			$data = array(
 					'email' =>$this->input->post('email'),
 			);
-					
-	
-				$mesg = $this->load->view('EmailCommande',$data,true);
-				$this->email->from('aboud976@live.fr','RecupArt');
-				$this->email->to($_SESSION['auth']['email'],'Commande');
-				$this->email->subject('Commande RecupArt');
-				$this->email->message($mesg);
-					
-				if($this->email->send()){
-	
+
+			$mesg = $this->load->view('EmailCommande',$data,true);
+			$this->email->from('aboud976@live.fr','RecupArt');
+			$this->email->to($_SESSION['auth']['email'],'Commande');
+			$this->email->subject('Commande RecupArt');
+			$this->email->message($mesg);
 				
-				$data = $this->session->set_flashdata('info','La commande a été envoyer à l\'adresse '.'<b> '.$_SESSION['auth']['email'].'</b>');
-				//$info['success'] = 'Inscription réussie';
-				$data['title'] = 'Envoi de commande';
-				$this->load->view('includes/header',$data);
-				$this->load->view('commande/validation',$data);
-				$this->load->view('commande/footer');
-				
-				}else{
-					
-				$data = $this->session->set_flashdata('info','La commande n\'a pas été envoyer à l\'adresse '.'<b> '.$_SESSION['auth']['email'].'</b> réessayer ?');
-				$data['title'] = 'Envoi de commande';
-				
-				$this->load->view('includes/header',$data);
-				$this->load->view('commande/validation',$data);
-				$this->load->view('commande/footer');
-				}
+			if($this->email->send()){
+
+			
+			$data = $this->session->set_flashdata('info','La commande a été envoyer à l\'adresse '.'<b> '.$_SESSION['auth']['email'].'</b>');
+			//$info['success'] = 'Inscription réussie';
+			$data['title'] = 'Envoi de commande';
+			$this->load->view('includes/header',$data);
+			$this->load->view('commande/validation',$data);
+			$this->load->view('commande/footer');
+			
 			}else{
-					
-				$data = $this->session->set_flashdata('info','Veuillez vous connecté pour enregistrer votre commande'.'
-					<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Se connecter</button>');
-				redirect(base_url('checkout',$data));
+				
+			$data = $this->session->set_flashdata('info','La commande n\'a pas été envoyer à l\'adresse '.'<b> '.$_SESSION['auth']['email'].'</b> réessayer ?');
+			$data['title'] = 'Envoi de commande';
+			
+			$this->load->view('includes/header',$data);
+			$this->load->view('commande/validation',$data);
+			$this->load->view('commande/footer');
 			}
+			
+		}else{
+				
+			$data = $this->session->set_flashdata('info','Veuillez vous connecté pour enregistrer votre commande'.'
+				<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Se connecter</button>');
+			redirect(base_url('checkout',$data));
+		}
 	}
 }

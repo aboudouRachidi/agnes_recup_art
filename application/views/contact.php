@@ -46,13 +46,14 @@
 		<div class="well">
 			<address>
 				<strong>Agnès FINET.</strong><br>
-					6 impasse Pascal<br>
-					14000, Caen<br>
+						6 impasse Pascal<br>
+						14000, Caen<br>
 			</address>
 			
 			<address>
 				<strong>E-mail</strong><br>
-					<a href="mailto:daxipol@gmail.com">daxipol@gmail.com</a>
+					<a href="mailto:daxipol@gmail.com">daxipol@gmail.com</a><br>
+					<abbr title = "Tel"><i class="fa fa-phone"></i></abbr> 0660 513616
 			</address>
 		</div>
 	</div>

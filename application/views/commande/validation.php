@@ -25,9 +25,7 @@
                 </ul>
                 <div class="clearfix"></div>
 			   </div>
-				<?php if(isset($_SESSION['info'])):?>
-					<div class="alert alert-success" id="alert-message"> <?=$_SESSION['info'];?></div>
-				<?php endif;?>	
+
 			 <?php if($this->cart->contents()):?>
 	 			<div class="row"><a id="top"></a>
 	 			<div class="col-md-4"><h5>Total commande <?= $this->cart->total();?> € <span class="label label-default">(<?= $this->cart->total_items();?> Article(s))</span></h5></div>

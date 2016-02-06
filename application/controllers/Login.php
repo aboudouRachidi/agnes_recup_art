@@ -10,7 +10,6 @@ class Login extends CI_Controller {
     }
     
 	public function index()
-	
 	{
 		if($this->session->userdata('auth') || $this->session->userdata('logged')){
 			

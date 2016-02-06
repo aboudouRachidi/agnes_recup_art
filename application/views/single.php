@@ -15,7 +15,7 @@
 				</div>
 
 				<div class="tags">
-				    	<h4 class="tag_head text-center">Tags Widget</h4>
+				    	<h4 class="tag_head text-center">Tags</h4>
 				         <ul class="tags_links">
 				         	<?php if(!empty($tagsCouleurs)):?>
 							<?php foreach ($tagsCouleurs as $tagsCouleur):?>
@@ -58,27 +58,11 @@
 								<div class="thumb-image"> <img src="<?= base_url()?>ressources/images/photoProduit/<?=$photo_produit->url_1?>" data-imagezoom="true" class="img-responsive" alt=""/> </div>
 							</li>
 						<?php endforeach;?>
+						<?php else:?>
+							<li data-thumb="<?= base_url()?>ressources/images/photoProduit/<?= $produit->photo_principale?>">
+								<div class="thumb-image"> <img class="img-responsive" src="<?= base_url()?>ressources/images/photoProduit/<?= $produit->photo_principale?>" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+							</li>
 						<?php endif;?>
-						<!-- 
-							<li data-thumb="<?= base_url()?>ressources/images/photoProduit/<?=$produit->photo_principale?>">
-								<div class="thumb-image"> <img src="<?= base_url()?>ressources/images/photoProduit/<?=$produit->photo_principale?>" data-imagezoom="true" class="img-responsive" alt=""/> </div>
-							</li>
-							<li data-thumb="<?= base_url()?>ressources/images/si1.jpg">
-								<div class="thumb-image"> <img src="<?= base_url()?>ressources/images/si1.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-							</li>
-							<li data-thumb="<?= base_url()?>ressources/images/si2.jpg">
-							<div class="thumb-image"> <img src="<?= base_url()?>ressources/images/si2.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-							</li>
-							<li data-thumb="<?= base_url()?>ressources/images/p1.jpg">
-							<div class="thumb-image"> <img src="<?= base_url()?>ressources/images/p1.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-							</li> 
-							<li data-thumb="<?= base_url()?>ressources/images/p2.jpg">
-							<div class="thumb-image"> <img src="<?= base_url()?>ressources/images/p2.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-							</li> 
-							<li data-thumb="<?= base_url()?>ressources/images/p3.jpg">
-							<div class="thumb-image"> <img src="<?= base_url()?>ressources/images/p3.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-							</li>
-							 --> 
 						</ul>
 					</div>
 				</div>
@@ -104,7 +88,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="span span3">
-						<p class="left">Materiaux utilisés</p>
+						<p class="left">Matériaux utilisés</p>
 						<?php foreach ($produit_materiaux as $produit_materiau):?>
 						<p class="right">&diams;<?= $produit_materiau->nom_materiaux;?>&nbsp;</p>
 						<?php endforeach;?>

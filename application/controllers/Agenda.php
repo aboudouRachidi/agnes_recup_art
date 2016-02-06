@@ -9,6 +9,7 @@ class Agenda extends CI_Controller {
 	public function index()
 	{
 		$data['title'] = 'Agenda';
+		
 		$config['base_url'] = base_url('agenda/index');
 		$config['total_rows'] = $this->agenda_model->total_agenda();
 		$config['use_page_numbers'] = TRUE;
@@ -68,8 +69,6 @@ class Agenda extends CI_Controller {
 		$data['title'] = 'Agenda : Archives - '.$this->uri->segment(3);
 		
 		$data['agenda'] = $this->agenda_model->getAll_Archives($this->uri->segment(3));
-
-	
 		$data['categories'] = $this->products_model->getAll_categories();
 		$data['materiaux'] = $this->products_model->getAll_materiau();
 		$data['DateArchives'] = $this->agenda_model->getAll_DateArchives();

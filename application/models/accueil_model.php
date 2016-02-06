@@ -6,6 +6,12 @@ class Accueil_model extends CI_Model {
     function __construct(){
         parent::__construct();
     }
+    
+    
+	/**
+	 * Permet de recuperer le texte du mention legale
+	 * @return tableau $data['mentionLegales']
+	 */
 	public function getMentionLegale()
 	{
 		$this->db->where('titre = "mention-legale"');
@@ -20,6 +26,10 @@ class Accueil_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer le texte de la livraison
+	 * @return tableau $data['livraisons']
+	 */
 	public function getLivraison()
 	{
 		$this->db->where('titre = "livraison"');
@@ -34,6 +44,10 @@ class Accueil_model extends CI_Model {
 		}
 	}
 
+	/**
+	 * Permet de recuperer le texte du CGV
+	 * @return tableau $data['CGV']
+	 */
 	public function getCGV()
 	{
 		$this->db->where('titre = "condition-generale-vente"');
@@ -48,6 +62,10 @@ class Accueil_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer le texte du CGU
+	 * @return tableau $data['CGU']
+	 */
 	public function getCGU()
 	{
 		$this->db->where('titre = "Terme-condition-utilisation"');
@@ -62,6 +80,10 @@ class Accueil_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les messages défilant
+	 * @return tableau $data['message']
+	 */
 	public function getMessageDefilant()
 	{
 		$Query = $this->db->get("message_defilant");
@@ -75,6 +97,9 @@ class Accueil_model extends CI_Model {
 		}
 	}
 	
+	/*
+	 * Permet d'inserer un abonné à la newsletter
+	 */
 	public function new_subscriber($data){
 		$this->db->insert('abonne',$data);
 	}

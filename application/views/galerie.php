@@ -5,6 +5,14 @@
 		 <div class="container">
 		        <div class="row style_featured">
 		        			<?php if(!empty($galeries)):?>
+		        			
+<!-- pagination -->					
+
+	<div class="col-md-12 text-right">	
+		<?=$this->pagination->create_links();?>
+	</div>
+
+<!-- pagination -->
 			       	   		<?php foreach ($galeries as $galerie):?>
 		            <div class="col-md-4">
 		                <div>
@@ -38,6 +46,13 @@
 		                </div>
 		            </div>
 		            	<?php endforeach;?>
+<!-- pagination -->					
+
+	<div class="col-md-12 text-right">	
+		<?=$this->pagination->create_links();?>
+	</div>
+
+<!-- pagination -->
 						<?php endif;?>
 		        	</div>
 				</div>

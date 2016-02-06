@@ -22,8 +22,11 @@ class Contact extends CI_Controller {
 		$this->load->view('includes/footer',$data);
 	
 	}
-	
-	function sendMessage(){
+
+	/**
+	 * Permet d'envoyer le message 
+	 */
+	public function sendMessage(){
 		
 		$data = array(
 				'email' =>$this->input->post('email'),

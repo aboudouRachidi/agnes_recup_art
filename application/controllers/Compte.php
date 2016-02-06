@@ -14,6 +14,7 @@ class Compte extends CI_Controller {
 		if($this->session->userdata('auth') || $this->session->userdata('logged')){
 			
 			$data['title'] = 'Espace client '.$_SESSION['auth']['email'];
+			
 			$data['categories'] = $this->products_model->getAll_categories();
 			$data['materiaux'] = $this->products_model->getAll_materiau();
 			$data['users'] = $this->Login_model->getAll($_SESSION['auth']['id']);
@@ -32,11 +33,13 @@ class Compte extends CI_Controller {
 		
 		
 		}else{
-		
 			redirect(base_url());
 		}
 	}
 
+	/**
+	 * Permet de mettre à jour les information du client dans la base de données
+	 */
 	function update(){
 		
 		$this->form_validation->set_rules('nom','Nom','trim|required|xss_clean');
@@ -67,6 +70,7 @@ class Compte extends CI_Controller {
 			
 			$data = $this->session->set_flashdata('info', 'Modification(s) effectuée(s)');
 			redirect('compte',$data);
+			
 		}else{
 			
 			$data['title'] = 'Espace client '.$_SESSION['auth']['email'];
@@ -90,6 +94,9 @@ class Compte extends CI_Controller {
 		}
 	}
 	
+	/**
+	 * Permet de mettre à jour le mot de passe du client
+	 */
 	function updatePassword(){
 	
 		$this->form_validation->set_rules('mdpActuel','Mot de passe','trim|required|xss_clean|callback_check_mdpActuel');
@@ -127,7 +134,14 @@ class Compte extends CI_Controller {
 		}
 	}
 	
+	/**
+	 * Permet de faire appel aux details de la commande 
+	 */
 	function orderDetail(){
+		if(!$this->session->userdata('auth') || !$this->session->userdata('logged')){
+			redirect(base_url());
+		}
+		
 		$data['categories'] = $this->products_model->getAll_categories();
 		$data['materiaux'] = $this->products_model->getAll_materiau();
 		$data['users'] = $this->Login_model->getAll($_SESSION['auth']['id']);
@@ -144,6 +158,9 @@ class Compte extends CI_Controller {
 		$this->load->view('includes/footer');
 	}
 	
+	/**
+	 * Permet d'annuler une commande
+	 */
 	function cancelOrder(){
 		/*$data = array(
 				'id_commande' => $this->uri->segment(3),
@@ -157,6 +174,9 @@ class Compte extends CI_Controller {
 
 	}
 	
+	/**
+	 * Permet de se deconnecter
+	 */
 	function logout(){
 		$this->session->unset_userdata('auth');
 		$this->session->unset_userdata('logged');
@@ -164,7 +184,11 @@ class Compte extends CI_Controller {
 		redirect(base_url());
 	}
 	
+
 	//fonction de call back
+	/**
+	 * Permet de verifier le mot de passe actuel avant modification
+	 */
 	function check_mdpActuel(){
 	
 		if($this->input->post('mdpActuel')){
@@ -187,6 +211,9 @@ class Compte extends CI_Controller {
 		}
 	}
 	
+	/**
+	 * Permet de verifier si le nouveaux mot de passe est différent du mot de passe actuel
+	 */
 	function check_mdpActuel_Nouveau(){
 	
 	if ($this->input->post('nouveauMdp')){
@@ -208,6 +235,9 @@ class Compte extends CI_Controller {
 		}
 	}
 	
+	/**
+	 * Permet de verifier si le mot de passe saisi est identique avant modification
+	 */
 	function check_mdp(){
 	
 		if(hash('sha256',$this->input->post('nouveauMdp')) !== hash('sha256',$this->input->post('confirmMdp'))){

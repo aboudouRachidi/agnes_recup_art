@@ -8,7 +8,10 @@ class Login_model extends CI_Model {
         parent::__construct();
     }
 
-    
+    /**
+     * Permet de verifier les données d'un client
+     * @param $email,$mdp determiner la correspondance dans la base de données
+     */
 	function check_id($email,$mdp)
 	{
 		$this->db->where('email',$email);
@@ -34,6 +37,11 @@ class Login_model extends CI_Model {
 		}
 	}
 	
+	/**
+	 * Permet de recuperer les données d'un client
+	 * @param $id client à trouver dans la base de données
+	 * @return tableau $data['users'] contenant les données du client
+	 */
 	function getAll($id){
 		
 		$this->db->where('id_client = '.$id);
@@ -48,38 +56,4 @@ class Login_model extends CI_Model {
 		}		
 	}
 }
-/*	function check_id($email,$mdp)
-	{
-		$this->db->where('email',$email);
-		$this->db->where('mdp',sha1($mdp));
-		
-		$query = $this->db->get('client');
-		if($query->num_rows()>0)
-		{
-			foreach ($query->result() as $user)
-			{
-				$this->session->set_userdata(
-						'auth',
-						array(
-								'id'   => $user->id_client,
-								'nom' => $user->nom,
-								'prenom' => $user->prenom,
-								'email' => $user->email,
-								'telephone' => $user->telephone,
-								'mdp' => $user->mdp,
-								'adresseD' => $user->adresse_domicile,
-								'cpD' => $user->code_postale_domicile,
-								'villeD' => $user->ville_domicile,
-								'adresseL' => $user->adresse_livraison,
-								'cpL' => $user->code_postale_livraison,
-								'villeL' => $user->ville_livraison,
-								'logged'=>true
-						)
-						);
-			return true;
 
-			}
-
-		}
-	}
-*/

@@ -38,7 +38,14 @@
 						            </div>
 						            <div id="collapseUser" class="panel-collapse collapse in">
 						                <div class="panel-body">
-						                    <p></p>
+						                 <?php if(!empty($orders)):?>
+										<?php foreach ($orders as $order):?>
+										<?php if($order->code_suivi !== "")?>
+										
+											<small>Votre commande R_A<?=$order->id_commande?> est en cours de livraison...</small><br>
+											
+										<?php endforeach;?>
+										<?php endif;?>
 						                </div>
 						            </div>
 						        </div>
@@ -207,8 +214,8 @@
 
 						                            </div>
 						                            <div class="pull-right">
-						                               <label class="label label-default"><?= $order->code_suivi;?></label>
-						                                 <label class="label label-default">n°: R_A<?= $order->id_commande;?></label>
+						                               <label class="label label-default" title="code de suivi colis">Suivi : <?= $order->code_suivi;?></label>
+						                                 <label class="label label-default" title="N°de Facture">N°: R_A<?= $order->id_commande;?></label>
 						                            </div>
 						                        </div>
 						                        <div>
@@ -259,7 +266,7 @@
 						                            </div>
 						                            <div class="pull-right">
 						                               <label class="label label-default"><?= $orderW->code_suivi;?></label>
-						                                 <label class="label label-default">n°: R_A<?= $orderW->id_commande;?></label>
+						                                 <label class="label label-default">N°: R_A<?= $orderW->id_commande;?></label>
 						                                 <a class="label label-danger" href="<?=base_url('compte/cancelOrder/'.$orderW->id_commande)?>">Annuler</a>
 						                            </div>
 						                        </div>

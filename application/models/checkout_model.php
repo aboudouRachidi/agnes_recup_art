@@ -6,7 +6,8 @@ class Checkout_model extends CI_Model {
     function __construct(){
         parent::__construct();
     }
-	// Insert order date with customer id in "orders" table in database.
+    
+	// Insert order date with customer id in "commande" table in database.
 	public function insert_order($data)
 	{
 		$this->db->insert('commande', $data);
@@ -14,7 +15,7 @@ class Checkout_model extends CI_Model {
 		return (isset($id)) ? $id : FALSE;
 	}
 	
-	// Insert ordered product detail in "order_detail" table in database.
+	// Insert ordered product detail in "detail_commande" table in database.
 	public function insert_order_detail($data)
 	{
 		$this->db->insert('detail_commande', $data);

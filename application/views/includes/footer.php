@@ -23,6 +23,7 @@
 		<!--Fin Mentions Legales -->
 		
 		<!-- Livraison -->
+		<!-- 
 		<div class="modal fade" id="modalLiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
@@ -39,7 +40,7 @@
 					<?php endif;?>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Lu</button>
 		      </div>
 		    </div>
 		  </div>
@@ -63,7 +64,7 @@
 					<?php endif;?>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Lu</button>
 		      </div>
 		    </div>
 		  </div>
@@ -86,7 +87,7 @@
 					<?php endif;?>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Lu</button>
 		      </div>
 		    </div>
 		  </div>
@@ -137,7 +138,7 @@
 					<ul class="f_nav">
 						<li><a href="#" data-toggle="modal" data-target="#modalCGU">Conditions générales d’utilisation</a></li>
 						<li><a href="#" data-toggle="modal" data-target="#modalCGV">Conditions générales de vente</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modalLiv">Livraisons</a></li>
+						<!--<li><a href="#" data-toggle="modal" data-target="#modalLiv">Livraisons</a></li>-->
 					</ul>	
 				</div>
 
@@ -165,10 +166,10 @@
 $(document).ready(function () {
 	 
 	window.setTimeout(function() {
-	    $("#alert-message").fadeTo(850, 0).slideUp(500, function(){
+	    $("#alert-message").fadeTo(1000, 0).slideUp(500, function(){
 	        $(this).remove(); 
 	    });
-	}, 5000);
+	}, 8000);
 	 
 	});
 </script>
