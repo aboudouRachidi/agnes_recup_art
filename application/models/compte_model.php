@@ -105,8 +105,9 @@ class Compte_model extends CI_Model {
 	 * @param $id commande à trouver dans la base de données
 	 * @return tableau $data['commande'] contenant les données
 	 */
-	public function getOrder_detail($id)
+	public function getOrder_detail($id,$id_client)
 	{
+		$this->db->where('commande.id_client = '.$id_client);
 		$this->db->where('commande.id_client = client.id_client AND detail_commande.id_commande = commande.id_commande
 				AND produit.id_produit = detail_commande.id_produit AND commande.id_commande = '.$id);
 		$Query = $this->db->get('commande,client,detail_commande,produit');
@@ -124,10 +125,23 @@ class Compte_model extends CI_Model {
 	 * Permet de supprimer une commande en attente d'un client
 	 * @param $id commande à trouver dans la base de données
 	 */
-	public function DeleteOrder($id){
-		$tables = array('detail_commande','commande');
-		$this->db->where('id_commande', $id);
-		$this->db->delete($tables);
+	public function DeleteOrder($id,$id_client){
+		//on verifie si la commande appartient à l'utilisateur on return true sinon false 
+		$Query =  $this->db->query('SELECT id_client FROM `commande`
+				WHERE commande.id_commande = '.$id. ' AND id_client = '.$id_client);
+		
+		if($Query->num_rows() > 0 ){
+			
+			$tables = array('detail_commande','commande');
+			$this->db->where('id_commande', $id);
+			$this->db->delete($tables);
+			
+			return true;//true
+			
+		}else{
+			
+			return false;//false
+		}
 
 	}
 	

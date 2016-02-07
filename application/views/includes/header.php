@@ -98,6 +98,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- header-section-ends -->
 <!-- si on a un message d'information quelconque on l'affiche dans cette <div> -->
 		<?php if(isset($_SESSION['info'])):?>
-			<div class="alert alert-success text-center" id="alert-message"> <?=$_SESSION['info'];?></div>
+			<div class="alert alert-success text-center" id="alert-message"><b class="info"><?=$_SESSION['info'];?></b></div>
+		<?php endif;?>
+		<?php if(isset($_SESSION['erreur'])):?>
+			<div class="alert alert-danger text-center" id="alert-message"><b class="erreur"><?=$_SESSION['erreur'];?></b></div>
 		<?php endif;?>
 <!-- fin de message d'information -->	

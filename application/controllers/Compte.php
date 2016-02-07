@@ -138,14 +138,14 @@ class Compte extends CI_Controller {
 	 * Permet de faire appel aux details de la commande 
 	 */
 	function orderDetail(){
-		if(!$this->session->userdata('auth') || !$this->session->userdata('logged')){
+		if(!$this->session->userdata('auth')){
 			redirect(base_url());
 		}
 		
 		$data['categories'] = $this->products_model->getAll_categories();
 		$data['materiaux'] = $this->products_model->getAll_materiau();
 		$data['users'] = $this->Login_model->getAll($_SESSION['auth']['id']);
-		$data['ordersDetails'] = $this->Compte_model->getOrder_detail($this->uri->segment(3));
+		$data['ordersDetails'] = $this->Compte_model->getOrder_detail($this->uri->segment(3),$_SESSION['auth']['id']);
 		$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
 		$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
 		$data['mentionsCGU'] = $this->Accueil_model->getCGU();
@@ -168,10 +168,13 @@ class Compte extends CI_Controller {
 		);
 		*/
 		
-		$this->Compte_model->DeleteOrder($this->uri->segment(3));
+		if($this->Compte_model->DeleteOrder($this->uri->segment(3),$_SESSION['auth']['id'])){
 		$data = $this->session->set_flashdata('info', 'Commande annulé');
 		redirect($_SERVER['HTTP_REFERER'],$data);		
-
+		}else{
+			$data = $this->session->set_flashdata('erreur', 'Cette commande n\'existe pas');
+			redirect($_SERVER['HTTP_REFERER'],$data);
+		}
 	}
 	
 	/**

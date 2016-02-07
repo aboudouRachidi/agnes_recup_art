@@ -34,6 +34,21 @@ hr:after {
     padding: 0 0.25em;
     background: white;
 }
+.erreur{
+	color : red;
+	font-size : 18px;
+	font-weight : bold;
+}
+.info{
+	font-size : 18px;
+	font-weight : bold;
+}
+#img-responsive{
+background-size: cover;
+width: 300px;
+height: 230px;
+}
+
 table{
 border: 15px solid #25BAE4;
 border-collapse:collapse;
@@ -1687,7 +1702,7 @@ ul.women_pagenation li a:hover{
     padding-bottom: 18px;
 }
 .reg p{
-	color: #CAC9C9;
+	color: #878787;
 	margin: 0px 0 0 0;
 	font-size: 14px;
 	line-height: 1.8em;
@@ -2130,7 +2145,7 @@ p.tab-text {
     margin-top: 16px;
     font-size: 13px;
     line-height: 23px;
-    color: #CAC9C9;
+    color: #989898;
 }
 .dress-name span {
 	float: right;
