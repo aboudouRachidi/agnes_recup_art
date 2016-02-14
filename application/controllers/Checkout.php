@@ -92,7 +92,7 @@ class Checkout extends CI_Controller {
 			if($this->Login_model->check_id($this->input->post('email'),$this->input->post('mdp')))
 			{
 				$data['users'] = $this->Login_model->getAll($_SESSION['auth']['id']);
-				$data = $this->session->set_flashdata('info','Vous pouvez conntinuer votre commande');
+				$data = $this->session->set_flashdata('info','Vous pouvez continuer votre commande');
 				redirect('checkout',$data);
 		
 			}else{
@@ -100,6 +100,9 @@ class Checkout extends CI_Controller {
 						<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">Reessayer ?</button>');
 				redirect('checkout',$data);
 			}
+		}else{
+				redirect(base_url('checkout'));
+			
 		}
 	}
 	
@@ -142,7 +145,8 @@ class Checkout extends CI_Controller {
 		}else{
 			
 			$data = $this->session->set_flashdata('error','Veuillez vous connecté pour enregistrer votre commande '.'
-					<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Se connecter</button>');
+					<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Se connecter</button>
+					<a class="btn btn-success btn-sm" href="'.base_url('register').'"">Créer un compte</a>');
 			redirect(base_url('checkout',$data));
 			
 		}
@@ -171,7 +175,8 @@ class Checkout extends CI_Controller {
 		}else{
 			
 			$data = $this->session->set_flashdata('error','Veuillez vous connecté pour enregistrer votre commande'.'
-					<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Se connecter</button>');
+					<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Se connecter</button>
+					<a class="btn btn-success btn-sm" href="'.base_url('register').'"">Créer un compte</a>');
 			redirect(base_url('checkout',$data));
 			
 		}
@@ -189,8 +194,7 @@ class Checkout extends CI_Controller {
 	function saveOrder(){
 		
 		$this->load->model('checkout_model');
-		
-		
+
 		$order = array(
 				'date_commande' => date('Y-m-d'),
 				'total' => $this->cart->total(),
@@ -207,14 +211,22 @@ class Checkout extends CI_Controller {
 				'quantite' => $item['qty'],
 				'prix' => $item['price']
 		);
-		
 		// Insert product imformation with order detail, store in cart also store in database.
-		
 		$cust_id = $this->checkout_model->insert_order_detail($order_detail);
 		endforeach;
 		endif;
+		
+		$mesg = $this->load->view('EmailCommande',$order_detail,true);
+		$this->email->from($_SESSION['auth']['email'],'RecupArt');
+		$this->email->to('ofcl-aboud976@live.fr','Commande RecupArt');
+		$this->email->subject('Nouvelle commande enregistrer');
+		$this->email->message($mesg);
+		
+		if($this->email->send()){
+		
 		$data = $this->session->set_flashdata('info','Votre commande a été enregistrer');
 		redirect(base_url('checkout/orderValidation'));
+		}
 	}
 	
 	/**
@@ -234,7 +246,8 @@ class Checkout extends CI_Controller {
 		}else{
 			
 			$data = $this->session->set_flashdata('error','Veuillez vous connecté pour enregistrer votre commande'.'
-					<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Se connecter</button>');
+					<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Se connecter</button>
+					<a class="btn btn-success btn-sm" href="'.base_url('register').'"">Créer un compte</a>');
 			redirect(base_url('checkout',$data));
 		}
 		

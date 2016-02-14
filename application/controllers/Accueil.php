@@ -46,7 +46,7 @@ class Accueil extends CI_Controller {
 				
 				redirect($_SERVER['HTTP_REFERER'],$data);
 			}else{
-			$data = $this->session->set_flashdata('info','Cet email<b class="btn btn-danger btn-xs"> '.$this->input->post('email').' </b>est déjà utilisé');
+			$data = $this->session->set_flashdata('erreur','Cet email <b class="btn btn-danger btn-md">'.$this->input->post('email').'</b> est déjà utilisé');
 				
 			redirect($_SERVER['HTTP_REFERER'],$data);
 		}

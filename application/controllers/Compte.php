@@ -21,6 +21,7 @@ class Compte extends CI_Controller {
 			$data['orders'] = $this->Compte_model->getOrder($_SESSION['auth']['id']);
 			$data['ordersWait'] = $this->Compte_model->getOrderWait($_SESSION['auth']['id']);
 			$data['ordersFinish'] = $this->Compte_model->getOrderFinish($_SESSION['auth']['id']);
+			$data['ordersDetails'] = $this->Compte_model->getOrder_detail($this->uri->segment(3),$_SESSION['auth']['id']);
 			$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
 			$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
 			$data['mentionsCGU'] = $this->Accueil_model->getCGU();
@@ -41,6 +42,9 @@ class Compte extends CI_Controller {
 	 * Permet de mettre à jour les information du client dans la base de données
 	 */
 	function update(){
+		if(!$this->session->userdata('auth')){
+			redirect(base_url());
+		}
 		
 		$this->form_validation->set_rules('nom','Nom','trim|required|xss_clean');
 		$this->form_validation->set_rules('prenom','Prenom','trim|required|xss_clean');
@@ -81,11 +85,11 @@ class Compte extends CI_Controller {
 			$data['orders'] = $this->Compte_model->getOrder($_SESSION['auth']['id']);
 			$data['ordersWait'] = $this->Compte_model->getOrderWait($_SESSION['auth']['id']);
 			$data['ordersFinish'] = $this->Compte_model->getOrderFinish($_SESSION['auth']['id']);
+			$data['ordersDetails'] = $this->Compte_model->getOrder_detail($this->uri->segment(3),$_SESSION['auth']['id']);
 			$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
 			$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
 			$data['mentionsCGU'] = $this->Accueil_model->getCGU();
 			$data['mentionsCGV'] = $this->Accueil_model->getCGV();
-			$ordersDetails = $this->Compte_model->getOrder_detail($this->uri->segment(3));
 			
 			$this->load->view('includes/header',$data);
 			$this->load->view('includes/menu',$data);
@@ -99,6 +103,10 @@ class Compte extends CI_Controller {
 	 */
 	function updatePassword(){
 	
+		if(!$this->session->userdata('auth')){
+			redirect(base_url());
+		}
+		
 		$this->form_validation->set_rules('mdpActuel','Mot de passe','trim|required|xss_clean|callback_check_mdpActuel');
 		$this->form_validation->set_rules('nouveauMdp','Mot de passe','trim|required|xss_clean|min_length[6]|callback_check_mdpActuel_Nouveau');
 		$this->form_validation->set_rules('confirmMdp','Comfirmer mot de passe','trim|required|xss_clean|callback_check_mdp');
@@ -120,11 +128,12 @@ class Compte extends CI_Controller {
 			$data['orders'] = $this->Compte_model->getOrder($_SESSION['auth']['id']);
 			$data['ordersWait'] = $this->Compte_model->getOrderWait($_SESSION['auth']['id']);
 			$data['ordersFinish'] = $this->Compte_model->getOrderFinish($_SESSION['auth']['id']);
+			$data['ordersDetails'] = $this->Compte_model->getOrder_detail($this->uri->segment(3),$_SESSION['auth']['id']);
 			$data['mentionsLegales'] = $this->Accueil_model->getMentionLegale();
 			$data['mentionsLivraison'] = $this->Accueil_model->getLivraison();
 			$data['mentionsCGU'] = $this->Accueil_model->getCGU();
 			$data['mentionsCGV'] = $this->Accueil_model->getCGV();
-			$ordersDetails = $this->Compte_model->getOrder_detail($this->uri->segment(3));
+			
 			
 			$data['title'] = 'Espace client '.$_SESSION['auth']['email'];
 			$this->load->view('includes/header',$data);
@@ -162,18 +171,17 @@ class Compte extends CI_Controller {
 	 * Permet d'annuler une commande
 	 */
 	function cancelOrder(){
-		/*$data = array(
-				'id_commande' => $this->uri->segment(3),
-				
-		);
-		*/
+		
+		if(!$this->session->userdata('auth')){
+			redirect(base_url());
+		}
 		
 		if($this->Compte_model->DeleteOrder($this->uri->segment(3),$_SESSION['auth']['id'])){
 		$data = $this->session->set_flashdata('info', 'Commande annulé');
 		redirect($_SERVER['HTTP_REFERER'],$data);		
 		}else{
-			$data = $this->session->set_flashdata('erreur', 'Cette commande n\'existe pas');
-			redirect($_SERVER['HTTP_REFERER'],$data);
+			$data = $this->session->set_flashdata('erreur', 'Impossible d\'effectuer cette opération car la commande est en cours de livraison ou  n\'existe pas');
+			redirect('compte',$data);
 		}
 	}
 	
